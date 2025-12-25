@@ -1,4 +1,5 @@
 import express from 'express';
+import { prisma } from './db.js';
 
 export const app=express();
 
@@ -13,6 +14,15 @@ app.post("/sum", async(req,res)=>{
         })
     }
     const ans=a+b;
+
+    await prisma.request.create({
+        data:{
+            a:a,
+            b:b,
+            answer: ans,
+            type:"sum"
+        }
+    })
     res.status(200).json({
         sum:ans
     })

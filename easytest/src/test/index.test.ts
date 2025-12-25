@@ -1,6 +1,18 @@
-import {describe, expect, test, it} from '@jest/globals';
+import {describe, expect, test, it, vi} from 'vitest';
 import request from 'supertest';
 import { app } from '../index.js';
+import { prisma } from '../db.js';
+import { create } from 'domain';
+
+vi.mock("../db", ()=>{
+    return{
+        prisma:{
+            request:{
+                create:vi.fn()
+            }
+        }
+    }
+})
 
 
 describe("http sum server", ()=>{
