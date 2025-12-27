@@ -31,7 +31,7 @@ describe("http sum server", ()=>{
       vi.spyOn(prisma.request, "create")
 
         const res=await request(app).post('/sum')
-       .send({a:5, b:4})
+       .send({a:4, b:5})
         
       expect(prisma.request.create).toHaveBeenCalledWith({
        data:{
